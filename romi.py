@@ -73,8 +73,16 @@ class Romi:
     self.write_pack(24, 'B14s', 1, notes.encode("ascii"))
 
   def motors(self, left, right):
-    self.write_pack(6, 'hhB', left, right)
-	self.write_pack(43, 'B', 1)
+    self.write_pack(6, 'hh', left, right)
+    self.watchdog()
+
+  def motor(self, index, speed);
+    if index in [0, 1]:
+      self.write_pack(6 + (index * 2), 'h', speed)
+	  watchdog()
+	
+  def watchdog(self):
+    self.write_pack(43, 'B', 1)
 
   def read_buttons(self):
     return self.read_unpack(3, 3, "???")
