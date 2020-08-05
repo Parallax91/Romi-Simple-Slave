@@ -43,7 +43,7 @@ class LSM6(object):
 class Romi:
   def __init__(self):
     self.bus = smbus.SMBus(1)
-	self.imu = LSM6()
+    self.imu = LSM6()
 
   def read_unpack(self, address, size, format):
     # Ideally we could do this:
@@ -79,8 +79,8 @@ class Romi:
   def motor(self, index, speed);
     if index in [0, 1]:
       self.write_pack(6 + (index * 2), 'h', speed)
-	  watchdog()
-	
+      watchdog()
+    
   def watchdog(self):
     self.write_pack(43, 'B', 1)
 
@@ -102,6 +102,6 @@ class Romi:
   def test_write8(self):
     self.bus.write_i2c_block_data(20, 0, [0,0,0,0,0,0,0,0])
     time.sleep(0.0001)
-	
+
   def beepBoop(self):
-	self.play_notes("o4l16ceg>c8")
+    self.play_notes("o4l16ceg>c8")
