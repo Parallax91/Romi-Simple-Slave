@@ -79,7 +79,7 @@ class Romi:
   def motor(self, index, speed);
     if index in [0, 1]:
       self.write_pack(6 + (index * 2), 'h', speed)
-      watchdog()
+      self.watchdog()
     
   def watchdog(self):
     self.write_pack(43, 'B', 1)
