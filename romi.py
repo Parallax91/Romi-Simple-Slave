@@ -84,6 +84,9 @@ class Romi:
   def watchdog(self):
     self.write_pack(43, 'B', 1)
 
+  def reset_encoders(self):
+    self.write_pack(44, 'B', 1)
+
   def read_buttons(self):
     return self.read_unpack(3, 3, "???")
 
