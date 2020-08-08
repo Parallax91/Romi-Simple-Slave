@@ -65,12 +65,18 @@ class Romi:
             if i==2:
                 raise error
     return struct.unpack(format, bytes(byte_list))
-
+  
   def write_pack(self, address, format, *data):
-    data_array = list(struct.pack(format, *data))
-    self.bus.write_i2c_block_data(20, address, data_array)
-    time.sleep(0.0001)
-
+    for i in range(3):
+        try:
+            data_array = list(struct.pack(format, *data))
+            self.bus.write_i2c_block_data(20, address, data_array)
+            time.sleep(0.0001)
+            break
+        except OSError as error:
+            if i==2:
+                raise error
+  
   def leds(self, red, yellow, green):
     self.write_pack(0, 'BBB', red, yellow, green)
 
