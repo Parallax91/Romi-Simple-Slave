@@ -55,10 +55,15 @@ class Romi:
     #
     # A delay of 0.0001 (100 us) after each write is enough to account
     # for the worst-case situation in our example code.
-
-    self.bus.write_byte(20, address)
-    time.sleep(0.0001)
-    byte_list = [self.bus.read_byte(20) for _ in range(size)]
+    for i in range(3):
+        try:
+            self.bus.write_byte(20, address)
+            time.sleep(0.0001)
+            byte_list = [self.bus.read_byte(20) for _ in range(size)]
+            break
+        except OSError as error:
+            if i==2:
+                raise error
     return struct.unpack(format, bytes(byte_list))
 
   def write_pack(self, address, format, *data):
